@@ -7,6 +7,7 @@ import (
 	"os/user"
 	"path/filepath"
 
+	"github.com/mmcdole/gofeed"
 	"github.com/urfave/cli"
 
 	"github.com/favadi/podmandi"
@@ -39,7 +40,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	m, err := podmandi.NewManager(podmandi.WithDataFile(df))
+	m, err := podmandi.NewManager(gofeed.NewParser(), podmandi.WithDataFile(df))
 	if err != nil {
 		log.Fatal(err)
 	}

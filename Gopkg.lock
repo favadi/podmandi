@@ -2,14 +2,50 @@
 
 
 [[projects]]
+  name = "github.com/PuerkitoBio/goquery"
+  packages = ["."]
+  revision = "e1271ee34c6a305e38566ecd27ae374944907ee9"
+  version = "v1.1.0"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/andybalholm/cascadia"
+  packages = ["."]
+  revision = "349dd0209470eabd9514242c688c403c0926d266"
+
+[[projects]]
+  name = "github.com/mmcdole/gofeed"
+  packages = [".","atom","extensions","internal/shared","rss"]
+  revision = "303223474e837398b2f8a265e5572958bb5568c0"
+  version = "v1.0.0-beta"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/mmcdole/goxpp"
+  packages = ["."]
+  revision = "77e4a51a73ed99ee3f33c1474dc166866304acbd"
+
+[[projects]]
   name = "github.com/urfave/cli"
   packages = ["."]
   revision = "cfb38830724cc34fedffe9a2a29fb54fa9169cd1"
   version = "v1.20.0"
 
+[[projects]]
+  branch = "master"
+  name = "golang.org/x/net"
+  packages = ["html","html/atom","html/charset"]
+  revision = "c7086645de248775cbf2373cf5ca4d2fa664b8c1"
+
+[[projects]]
+  branch = "master"
+  name = "golang.org/x/text"
+  packages = ["encoding","encoding/charmap","encoding/htmlindex","encoding/internal","encoding/internal/identifier","encoding/japanese","encoding/korean","encoding/simplifiedchinese","encoding/traditionalchinese","encoding/unicode","internal/gen","internal/tag","internal/utf8internal","language","runes","transform","unicode/cldr"]
+  revision = "88f656faf3f37f690df1a32515b479415e1a6769"
+
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "df4a79a3008603763e1d51475bb94e1290af5af71be4761ef9369093fcce7009"
+  inputs-digest = "38f56dfa8dd3793c931da1221f7b0d4d6d95cf049caab0f95b35a5a5919e1e3b"
   solver-name = "gps-cdcl"
   solver-version = 1
