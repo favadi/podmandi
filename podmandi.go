@@ -8,6 +8,9 @@ import (
 	"github.com/mmcdole/gofeed"
 )
 
+// how many episodeds to download when adding new podcast
+const initialDownload = 1
+
 // feedParser is the podcast URL parser.
 type feedParser interface {
 	ParseURL(feedURL string) (feed *gofeed.Feed, err error)
@@ -79,7 +82,16 @@ func (m *Manager) Add(url string) error {
 		return err
 	}
 
-	m.Podcasts = append(m.Podcasts, Podcast{URL: url, Feed: feed})
+	lastItem := len(feed.Items) - initialDownload
+	if lastItem < 0 {
+		lastItem = 0
+	}
+
+	m.Podcasts = append(m.Podcasts, Podcast{
+		URL:      url,
+		Feed:     feed,
+		LastItem: lastItem,
+	})
 	return m.save()
 }
 
@@ -97,4 +109,13 @@ func (m *Manager) save() error {
 
 	encoder := json.NewEncoder(fp)
 	return encoder.Encode(m.Podcasts)
+}
+
+// List returns all configured podcasts.
+func (m *Manager) List() []string {
+	podcasts := make([]string, len(m.Podcasts))
+	for i, p := range m.Podcasts {
+		podcasts[i] = p.Feed.Title
+	}
+	return podcasts
 }

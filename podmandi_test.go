@@ -270,7 +270,7 @@ func (ts *testParser) ParseURL(feedURL string) (feed *gofeed.Feed, err error) {
 	return
 }
 
-func TestManagerAdd(t *testing.T) {
+func TestManager(t *testing.T) {
 	m, err := NewManager(newTestParser())
 	if err != nil {
 		t.Fatal(err)
@@ -284,6 +284,14 @@ func TestManagerAdd(t *testing.T) {
 	}
 	if err = m.Add(validFeedURL); err == nil {
 		t.Fatal("duplicated URL is allow")
+	}
+	podcasts := m.List()
+	if len(podcasts) != 1 {
+		t.Fatalf("wrong number of podcast, expected: %d, got: %d", 1, len(podcasts))
+	}
+	expectedTitle := "Go Time"
+	if podcasts[0] != expectedTitle {
+		t.Fatalf("wrong podcast title, expected: %q, got: %q", expectedTitle, podcasts[0])
 	}
 }
 

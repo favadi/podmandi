@@ -2,6 +2,7 @@ package main
 
 import (
 	"errors"
+	"fmt"
 	"log"
 	"os"
 	"os/user"
@@ -50,6 +51,10 @@ func main() {
 			Name:   "add",
 			Action: addAction(m),
 		},
+		{
+			Name:   "list",
+			Action: listAction(m),
+		},
 	}
 
 	if err = app.Run(os.Args); err != nil {
@@ -57,7 +62,7 @@ func main() {
 	}
 }
 
-func addAction(m *podmandi.Manager) func(context *cli.Context) error {
+func addAction(m *podmandi.Manager) func(ctx *cli.Context) error {
 	return func(ctx *cli.Context) error {
 		url := ctx.Args().First()
 		if len(url) == 0 {
@@ -65,5 +70,14 @@ func addAction(m *podmandi.Manager) func(context *cli.Context) error {
 		}
 
 		return m.Add(url)
+	}
+}
+
+func listAction(m *podmandi.Manager) func(ctx *cli.Context) error {
+	return func(ctx *cli.Context) error {
+		for i, p := range m.List() {
+			fmt.Printf("%d. %s\n", i, p)
+		}
+		return nil
 	}
 }
